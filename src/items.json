@@ -6,7 +6,7 @@
         "winter": true,
         "spring": false,
         "summer": false,
-        "image": "/public/images/black.png",
+        "image": "https://github.com/vengefulcapybara505/development/blob/ccf657c1150fc0b43f62b82234b05939661fc3d4/public/images/black.png",
         "sale": true,
         "alt": "Black",
         "cartAdded": false
