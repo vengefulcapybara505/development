@@ -1,21 +1,49 @@
+
+*, *::before, *::after{
+	box-sizing: border-box;
+}
+
+
+/*gets rid of default margins*/
+*
+{
+	margin: 0;
+}
+
+
+
+img, picture, video, canvas, svg
+{
+	display: block;
+	max-width: 100%
+}
+
 .App {
   text-align: center;
   color: white;
   background-color: rgb(0, 0, 0);
-
+  
 }
 
 .header
 {
-  background-color: rgb(131, 127, 127);
+  position: fixed;
+  width: 100%;
+  background-color: black;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding-left: 2%;
-  padding-right: 2%;
+  padding: 2%;
+  
+}
+.spacer
+{
+  padding: 4%;
+  width: 100%;
 }
 
 .display-box{
+  
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -23,9 +51,24 @@
 
 .options
 {
-  background-color: rgb(114, 110, 110);
-  width: 50%;
+  border-style: solid;
+  border-color: #48bae8;
+  border-width: 5px;
+  border-radius: 5px;
+  width: 25%;
+  margin-left: 1%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+.option-list
+{
+  list-style: none;
+  text-align: left;
+  padding: 1%;
+}
+
 .items-list
 {
   width: 100%;
@@ -38,10 +81,93 @@
 .cart-item
 {
   width: 25%;
-  padding: 2%;
+  padding-left: 2%;
+  padding-right: 2%;
+  padding-bottom: 2%;
 }
 
-.cart-item p {
-  font-size: 8px;
+
+.item-image
+{
+  border-radius: 10px;
+  
+}
+
+.item-button
+{
+  
+  border-radius: 5px;
+  border: none;
+  padding: 1%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  text-align: center;
+  width: 60%;
+  text-decoration: none;
+  display: inline-block;
   color: white;
+  background-color: #48bae8;
+  font-size: 14px;
+}
+
+
+.cart-item p {
+  font-size: 15px;
+  color: white;
+} 
+
+.price
+{
+  font-size: 18px !important;
+  padding: 1%;
+}
+
+.colors
+{
+  padding: 5%;
+}
+
+
+.ripple {
+	/*background: #79b928;
+	color: #fff;*/
+	padding: 20px 23px;
+	position: relative;
+	overflow: hidden;
+}
+
+.ripple::before {
+	content: "";
+	position: absolute;
+	background-color: rgba(0,0,0,.1);
+	width: 10%;
+	height: 25%;
+	border-radius: 50%;
+	z-index: 1;
+	top: 35%;
+	left: 45%;
+	-webkit-transform: scale(0);
+	transform: scale(0);
+}
+
+.ripple:hover {
+	cursor: pointer;
+}
+
+.ripple:hover::before {
+	-webkit-transform: scale(12);
+	transform: scale(12);
+	-webkit-transition: border-radius .5s .5s,-webkit-transform .5s;
+	transition: border-radius .5s .5s,-webkit-transform .5s;
+	transition: transform .5s,border-radius .5s .5s;
+	transition: transform .5s,border-radius .5s .5s,-webkit-transform .5s;
+}
+
+.ripple:hover::after {
+	content: "";
+	position: absolute;
+	z-index: 2;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
 }

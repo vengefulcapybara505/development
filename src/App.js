@@ -13,7 +13,8 @@ function App() {
     fall: false,
     winter: false,
     spring: false,
-    summer: false
+    summer: false,
+    sale: false
   })
 
   const [fall, setFall] = useState(false);
@@ -109,7 +110,7 @@ function App() {
 
   const saleItem = (item) =>
   {
-    if(item.sale && sale)
+    if(!item.sale && styles["sale"])
     {
       return false;
     }
@@ -125,11 +126,7 @@ function App() {
     )
   }
 
-  const filteredItems = () =>
-  {
-    setsortCheap(!sortCheap);
-   
-  }
+ 
 
   const checked = (e) =>
   {
@@ -158,11 +155,7 @@ function App() {
     })
     
   )
-    //filteredItems();
-    return(Object.keys(list).filter((x) => styles["winter"] == x.winter).map((key) => {
-      return (<CartItem updateCart = {updateCart} item = {list[key]} index = {key}/>)
-      }))
-      
+   
   }
     
   function handleSelect(e)
@@ -185,21 +178,34 @@ function App() {
   return (
     <div className="App">
       <div class = "header">
-        <h1>Test</h1>
-        <h1>Cart</h1>
+        <h1>ARTIKEN Hand Bracelets</h1>
+        <h1>Cart Total ${Math.abs(cost).toFixed(2)} </h1>
       </div>
-
+      <div class = "spacer">
+      
+      </div>
       <div class = "display-box">
+        
         <div class = "options">
-          <h2>
-            {Math.abs(cost).toFixed(2)}
-          </h2>
-          <TestComponent handleSelect = {handleSelect} />
-          <Checkbox label="Winter Colors" value= "winter" onChange = {checked} checked = {styles.winter}/>
-          <Checkbox label="Fall Colors" value= "fall" onChange = {checked} checked = {styles.fall}/>
-          <Checkbox label="Spring Colors" value= "spring" onChange = {checked} checked = {styles.spring}/>
-          <Checkbox label="Summer Colors" value= "summer" onChange = {checked} checked = {styles.summer}/>
+        <div class = "spacer"></div>
+          <h3>Sort by</h3>
           
+          <ul class = "option-list">
+            <li><TestComponent handleSelect = {handleSelect} /></li>
+          </ul>
+          <div class = "spacer"></div>
+          <h3>Filter by colors</h3>
+          <ul class = "option-list">
+          <li><Checkbox label=" Winter Colors" value= "winter" onChange = {checked} checked = {styles.winter}/></li>
+          <li><Checkbox label=" Fall Colors" value= "fall" onChange = {checked} checked = {styles.fall}/></li>
+          <li><Checkbox label=" Spring Colors" value= "spring" onChange = {checked} checked = {styles.spring}/></li>
+          <li><Checkbox label=" Summer Colors" value= "summer" onChange = {checked} checked = {styles.summer}/></li>
+          </ul>
+          <div class = "spacer"></div>
+          <h3>Filter by Sale</h3>
+          <ul class = "option-list">
+            <li><Checkbox label=" Sale" value= "sale" onChange = {checked} checked = {styles.sale}/></li>
+          </ul>
           
         </div>
         <div class = "items-list">
@@ -211,7 +217,8 @@ function App() {
         </div>
       </div>
 
-      
+      <div>
+      </div>
     </div>
   );
   
@@ -229,11 +236,14 @@ function Checkbox(props)
 
 function TestComponent(props)
 {
-return(<select onChange = {props.handleSelect} name = "sort" id = "sort">
+return(<div class = "dropdown-div">
+<select class = "dropdown" onChange = {props.handleSelect} name = "sort" id = "sorter">
 <option value = "default">Default</option>
 <option value =  "cheap">Price Low -&gt; High</option>
 <option value =  "expensive">Price High -&gt; Low</option>
-</select>)
+</select>
+</div>
+)
 }
 
 function CartItem(props)
@@ -244,42 +254,64 @@ function CartItem(props)
     
     if(!item.cartAdded)
     {
-      document.getElementById(id).textContent = "Remove from cart";
+      document.getElementById(id).textContent = "REMOVE FROM CART";
+      document.getElementById(id).style ="width: 80%;"
       props.updateCart(item, true);
       item.cartAdded = !item.cartAdded;
     }
     else if(item.cartAdded)
     {
-      document.getElementById(id).textContent = "Add to cart";
+      document.getElementById(id).textContent = "ADD TO CART";
+      document.getElementById(id).style ="width: 60%;"
       props.updateCart(item, false);
       item.cartAdded = !item.cartAdded;
     }
       
   }
-  const getButtonMessage = (item) =>
+  const getButtonMessage = (item, id) =>
   {
     if(item.cartAdded)
     {
-      return "Remove from Cart"
+      
+      return "REMOVE FROM CART"
     }
     else
     {
-      return "Add to Cart"
+      
+      return "ADD TO CART"
     }
+  }
+
+  const getStyle = (item) =>
+  {
+    if(item.cartAdded)
+    {
+      return {width: 80 + "%"};
+    }
+    else
+    {
+      return {width: 60 + "%"};
+    }
+  }
+
+  const getColors = (fall, winter, spring, summer) =>
+  {
+    let x = " ";
+    if (fall) x += "Fall";
+    if (winter) x += " " + "Winter";
+    if (spring) x += " " + "Spring";
+    if (summer) x += " " + "Summer";
+    return x;
   }
 
   return(
     
     <div class = "cart-item">
-      <img src = {props.item.image} alt = {props.alt}></img>
-      <h3>{props.item.name}</h3>
-      <p>{props.item.price}</p>
-      <p>Fall {props.item.fall.toString()}</p>
-      <p>Winter {props.item.winter.toString()}</p>
-      <p>Spring {props.item.spring.toString()}</p>
-      <p>Summer {props.item.summer.toString()}</p>
-      <p>Sale {props.item.sale.toString()}</p>
-      <button id = {props.item.name + "button"} onClick = {()=> change((props.item.name + "button"), props.item)}>{getButtonMessage(props.item)}</button>
+      <img src = {process.env.PUBLIC_URL + props.item.image} class = "item-image" alt = {props.alt}></img>
+      <h2>{props.item.name}</h2>
+      <p class = "price">${props.item.price}</p>
+      <p class = "colors">{getColors(props.item.fall, props.item.winter, props.item.spring, props.item.summer)}</p>
+      <button id = {props.item.name + "button"} style = {getStyle(props.item)} class = "item-button ripple" onClick = {()=> change((props.item.name + "button"), props.item)}>{getButtonMessage(props.item)}</button>
       
     </div>
 
