@@ -6,7 +6,7 @@
         "winter": true,
         "spring": false,
         "summer": false,
-        "image": "./images/black.png",
+        "image": "/public/images/black.png",
         "sale": true,
         "alt": "Black",
         "cartAdded": false
