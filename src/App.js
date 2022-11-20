@@ -1,13 +1,13 @@
 import { useState } from "react";
 import './App.css';
+import Cart from "./Cart";
 import products from './items.json'
 
 function App() {
-  const [list, setList] = useState(products);
+
   const [cart, setCart] = useState({})
   const [cost, setCost] = useState(0);
-  const [winter, setWinter] = useState(false);
-
+  const [see, setSee] = useState(false);
 
   const [styles, setStyles] = useState({
     fall: false,
@@ -17,83 +17,30 @@ function App() {
     sale: false
   })
 
-  const [fall, setFall] = useState(false);
-  const [spring, setSpring] = useState(false);
-  const [summer, setSummer] = useState(false);
-  const [sale, setSale] = useState(false);
-  const [sortCheap, setsortCheap] = useState(false);
-
   const [sort, setSort] = useState({
     default: true,
     cheap: false,
     expensive: false
   })
   
-  /*
-  function filteredItems() {
-    let newList = list;
-    
-    newList = newList.sort((a, b) => b.price - a.price)
-    newList= newList.slice(0, 2);
-
-    setList({...newList})
-  }
-
-  function updateCart()
-  {
-
-  }
-*/
-  /*
-  return(
-    <div>
-      <div>
-      <TestComponent filteredItems = {filteredItems}/>
-      </div>
-     
-
-      {Object.keys(list).map((key)=>
-      {
-       return(<CartItem updateCart = {updateCart} item = {products[key]} index = {key}/>)
-      })}
-
-      {/*list.map((item, index) => 
-              (<CartItem updateCart = {updateCart} item = {item} index = {index}/>))
-    }
-    </div>
-  );
-*/
-
-
+  
 
   const updateCart = (uid, add) =>
   {
+    let x = products.indexOf(uid);
     let newCart = cart;
-    if(!newCart[uid.name] && add)
+    if(!newCart[x] && add)
     {
-      newCart[uid.name] = true;
+      newCart[x] = 1;
       setCost(cost + uid.price);
     }
-    else if (newCart[uid.name] && !add)
+    else if (newCart[x] && !add)
     {
-      newCart[uid.name] = null;
+      newCart[x] = 0;
       setCost(cost - uid.price);
     }
     setCart({...newCart})
-    console.log(cost);
-  }
-
-  function cheapCart(y)
-  {
-    
-    if(sortCheap)
-    {
-      return (y.sort((a, b) => b.price - a.price))
-    }
-    else{
-      return y;
-    }
-    
+    console.log(newCart);
   }
 
 
@@ -130,7 +77,14 @@ function App() {
 
   const checked = (e) =>
   {
-    setStyles({...styles, [e.target.value]: e.target.checked})
+    if(e.target.value != "all")
+    {
+      setStyles({...styles, [e.target.value]: e.target.checked})
+    }
+    else{
+      setStyles({...styles, ["fall"]: false, ["winter"]: false, ["spring"]: false, ["summer"]: false, ["sale"]: false})
+    }
+    
   }
   
   const productList = () =>
@@ -173,14 +127,41 @@ function App() {
     }
     
   }
+
+  function showCart()
+  {
+    setSee(!see);
+ 
+  }
+
+  function getCart()
+  {
+    return (
+      Object.keys(cart).filter((x) => cart[x] != 0).map((key) =>
+      {
+        return(
+          <div class = "cart-list">
+            <h3>{products[key].name}</h3>
+            <p>${products[key].price}</p>
+          </div>
+
+        )
+      })
+    )
+  }
     
   
   return (
-    <div className="App">
+    <div>
+      {see ? <Cart total = {cost} list = {getCart} toggle = {showCart}/> : console.log("i hate")}
+<div className="App">
       <div class = "header">
         <h1>ARTIKEN Hand Bracelets</h1>
-        <h1>Cart Total ${Math.abs(cost).toFixed(2)} </h1>
+        <h1 class = "total" onClick={showCart}>Cart ${Math.abs(cost).toFixed(2)} </h1>
+        
       </div>
+      
+    
       <div class = "spacer">
       
       </div>
@@ -192,6 +173,10 @@ function App() {
           
           <ul class = "option-list">
             <li><TestComponent handleSelect = {handleSelect} /></li>
+          </ul>
+          <div class = "spacer"></div>
+          <ul class = "option-list">
+          <li><Checkbox label=" All Items" value= "all" onChange = {checked} checked = {!styles.winter && !styles.fall && !styles.spring && !styles.summer &&!styles.sale}/></li>
           </ul>
           <div class = "spacer"></div>
           <h3>Filter by colors</h3>
@@ -220,6 +205,9 @@ function App() {
       <div>
       </div>
     </div>
+    
+    </div>
+    
   );
   
 }

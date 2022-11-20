@@ -1,5 +1,6 @@
 [
     {
+        "index": 1,
         "name": "Black",
         "price": 9.99,
         "fall": false,
@@ -12,6 +13,7 @@
         "cartAdded": false
     },
     {
+        "index": 2,
         "name": "White",
         "price": 9.99,
         "fall": false,
@@ -24,6 +26,7 @@
         "cartAdded": false
     },
     {
+        "index": 3,
         "name": "Red",
         "price": 11.99,
         "fall": true,
@@ -36,6 +39,7 @@
         "cartAdded": false
     },
     {
+        "index": 4,
         "name": "Yellow",
         "price": 11.99,
         "fall": false,
@@ -48,6 +52,7 @@
         "cartAdded": false
     },
     {
+        "index": 5,
         "name": "Orange",
         "price": 15.99,
         "fall": false,
@@ -60,6 +65,7 @@
         "cartAdded": false
     },
     {
+        "index": 6,
         "name": "Sky Blue",
         "price": 19.99,
         "fall": false,
@@ -72,6 +78,7 @@
         "cartAdded": false
     },
     {
+        "index": 7,
         "name": "Green",
         "price": 19.99,
         "fall": false,
@@ -84,6 +91,7 @@
         "cartAdded": false
     },
     {
+        "index": 8,
         "name": "Brown",
         "price": 15.99,
         "fall": true,
@@ -96,6 +104,7 @@
         "cartAdded": false
     },
     {
+        "index": 9,
         "name": "Gold",
         "price": 29.99,
         "fall": true,
@@ -108,6 +117,7 @@
         "cartAdded": false
     },
     {
+        "index": 10,
         "name": "Cream",
         "price": 15.99,
         "fall": true,
@@ -120,6 +130,7 @@
         "cartAdded": false
     },
     {
+        "index": 11,
         "name": "Turquoise",
         "price": 29.99,
         "fall": false,
@@ -132,6 +143,7 @@
         "cartAdded": false
     },
     {
+        "index": 12,
         "name": "Maroon",
         "price": 15.99,
         "fall": false,
