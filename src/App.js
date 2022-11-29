@@ -40,7 +40,7 @@ function App() {
       setCost(cost - uid.price);
     }
     setCart({...newCart})
-    console.log(newCart);
+    
   }
 
 
@@ -98,7 +98,6 @@ function App() {
       }
       else if (sort["expensive"])
       {
-        console.log("hit");
         return b.price - a.price;
       }
       else{
@@ -153,7 +152,7 @@ function App() {
   
   return (
     <div>
-      {see ? <Cart total = {cost} list = {getCart} toggle = {showCart}/> : console.log("i hate")}
+      {see ? <Cart total = {cost} list = {getCart} toggle = {showCart}/> : null}
 <div className="App">
       <div class = "header">
         <h1>ARTIKEN Hand Bracelets</h1>
