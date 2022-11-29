@@ -294,7 +294,7 @@ function CartItem(props)
   return(
     
     <div class = "cart-item">
-      <img src = {props.item.image} class = "item-image" alt = {props.alt}></img>
+      <img src = {props.item.image} class = "item-image" alt = {props.item.alt}></img>
       <h2>{props.item.name}</h2>
       <p class = "price">${props.item.price}</p>
       <p class = "colors">{getColors(props.item.fall, props.item.winter, props.item.spring, props.item.summer)}</p>
